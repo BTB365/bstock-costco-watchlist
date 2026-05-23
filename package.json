@@ -1,0 +1,1 @@
+{"scripts":{"refresh":"node scripts/refresh-bstock.mjs"},"dependencies":{"playwright":"latest"},"devDependencies":{}}

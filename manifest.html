@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Pallet Manifest — SLC-6713310</title>
+<style>
+  :root {
+    --bg: #f5f6f8;
+    --card: #ffffff;
+    --text: #1a1f2e;
+    --muted: #6b7280;
+    --border: #e5e7eb;
+    --accent: #e31837; /* Costco red */
+    --accent-dark: #b3122a;
+    --good: #16a34a;
+    --shadow: 0 1px 3px rgba(0,0,0,.06), 0 4px 12px rgba(0,0,0,.04);
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.5;
+  }
+  header {
+    background: linear-gradient(135deg, #0a2540 0%, #1a3a5c 100%);
+    color: white;
+    padding: 32px 24px;
+  }
+  .header-inner { max-width: 1280px; margin: 0 auto; }
+  .lot-id { font-size: 13px; opacity: .75; letter-spacing: .12em; text-transform: uppercase; margin-bottom: 6px; }
+  h1 { margin: 0 0 18px; font-size: 26px; font-weight: 600; }
+  .stats { display: flex; gap: 28px; flex-wrap: wrap; }
+  .stat { }
+  .stat-label { font-size: 12px; opacity: .7; text-transform: uppercase; letter-spacing: .08em; }
+  .stat-value { font-size: 22px; font-weight: 600; margin-top: 2px; }
+
+  .container { max-width: 1280px; margin: 0 auto; padding: 24px; }
+
+  .controls {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-bottom: 20px;
+    align-items: center;
+  }
+  .search {
+    flex: 1;
+    min-width: 220px;
+    padding: 10px 14px;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    font-size: 14px;
+    background: white;
+  }
+  .search:focus { outline: 2px solid #2563eb; outline-offset: -1px; }
+  .filter-btn {
+    padding: 8px 14px;
+    border: 1px solid var(--border);
+    background: white;
+    border-radius: 999px;
+    font-size: 13px;
+    cursor: pointer;
+    color: var(--muted);
+    transition: all .15s;
+  }
+  .filter-btn:hover { border-color: var(--text); color: var(--text); }
+  .filter-btn.active { background: var(--text); color: white; border-color: var(--text); }
+
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 18px;
+  }
+  .card {
+    background: var(--card);
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: var(--shadow);
+    display: flex;
+    flex-direction: column;
+    transition: transform .15s, box-shadow .15s;
+  }
+  .card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0,0,0,.08), 0 12px 24px rgba(0,0,0,.06);
+  }
+  .img-wrap {
+    aspect-ratio: 4 / 3;
+    overflow: hidden;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .img-wrap img {
+    width: 100%; height: 100%; object-fit: cover; display: block;
+  }
+  .img-wrap svg.illust {
+    width: 70%; height: 70%;
+  }
+  .img-wrap.cat-Gardening { background: linear-gradient(135deg,#d1fae5,#a7f3d0); }
+  .img-wrap.cat-Outdoor-Cooking { background: linear-gradient(135deg,#fee2e2,#fecaca); }
+  .img-wrap.cat-Patio-Furniture { background: linear-gradient(135deg,#fef3c7,#fde68a); }
+  .img-wrap.cat-Lighting { background: linear-gradient(135deg,#fef9c3,#fef08a); }
+  .img-wrap.cat-Landscape-Lighting { background: linear-gradient(135deg,#dbeafe,#bfdbfe); }
+  .img-wrap.cat-Outdoor-Decor { background: linear-gradient(135deg,#fce7f3,#fbcfe8); }
+  .img-wrap.cat-Storage { background: linear-gradient(135deg,#e0e7ff,#c7d2fe); }
+  .qty-badge {
+    position: absolute;
+    top: 10px; right: 10px;
+    background: rgba(0,0,0,.78);
+    color: white;
+    font-size: 12px;
+    font-weight: 600;
+    padding: 4px 10px;
+    border-radius: 999px;
+  }
+  .body {
+    padding: 14px 16px 16px;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+  }
+  .desc {
+    font-weight: 600;
+    font-size: 14px;
+    margin-bottom: 4px;
+    line-height: 1.35;
+  }
+  .vendor {
+    font-size: 12px;
+    color: var(--muted);
+    margin-bottom: 10px;
+  }
+  .pricing {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    padding: 8px 0;
+    border-top: 1px solid var(--border);
+    margin-top: auto;
+  }
+  .unit-retail {
+    font-size: 13px;
+    color: var(--muted);
+  }
+  .ext-retail {
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--text);
+  }
+  .meta {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+    margin-bottom: 10px;
+  }
+  .tag {
+    font-size: 11px;
+    padding: 2px 8px;
+    background: #eef2f7;
+    border-radius: 4px;
+    color: #475569;
+  }
+  .tag.cond { background: #dcfce7; color: #166534; }
+  .actions {
+    display: flex;
+    gap: 8px;
+    padding-top: 10px;
+    border-top: 1px solid var(--border);
+  }
+  .btn {
+    flex: 1;
+    text-align: center;
+    padding: 8px 10px;
+    border-radius: 6px;
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 500;
+    transition: background .15s;
+  }
+  .btn-primary {
+    background: var(--accent);
+    color: white;
+  }
+  .btn-primary:hover { background: var(--accent-dark); }
+  .btn-secondary {
+    background: #f0f1f4;
+    color: var(--text);
+  }
+  .btn-secondary:hover { background: #e5e7eb; }
+
+  footer {
+    text-align: center;
+    color: var(--muted);
+    font-size: 12px;
+    padding: 32px 24px;
+  }
+  .empty {
+    text-align: center;
+    color: var(--muted);
+    padding: 60px 20px;
+    grid-column: 1/-1;
+  }
+</style>
+</head>
+<body>
+<header>
+  <div class="header-inner">
+    <div class="lot-id">Lot SLC-6713310 · Salt Lake City</div>
+    <h1>2 Pallets of Gardening, Patio Furniture, Outdoor Cooking &amp; More</h1>
+    <div class="stats">
+      <div class="stat"><div class="stat-label">Units</div><div class="stat-value">44</div></div>
+      <div class="stat"><div class="stat-label">Line Items</div><div class="stat-value">24</div></div>
+      <div class="stat"><div class="stat-label">Ext. Retail</div><div class="stat-value">$5,724</div></div>
+      <div class="stat"><div class="stat-label">Condition</div><div class="stat-value">Used – Good</div></div>
+    </div>
+  </div>
+</header>
+
+<div class="container">
+  <div class="controls">
+    <input type="text" id="search" class="search" placeholder="Search items, vendors, categories…" />
+    <button class="filter-btn active" data-cat="all">All</button>
+    <button class="filter-btn" data-cat="Gardening">Gardening</button>
+    <button class="filter-btn" data-cat="Patio Furniture">Patio Furniture</button>
+    <button class="filter-btn" data-cat="Outdoor Cooking">Outdoor Cooking</button>
+    <button class="filter-btn" data-cat="Lighting">Lighting</button>
+    <button class="filter-btn" data-cat="Landscape Lighting">Landscape Lighting</button>
+    <button class="filter-btn" data-cat="Outdoor Decor">Outdoor Decor</button>
+    <button class="filter-btn" data-cat="Storage">Storage</button>
+  </div>
+
+  <div class="grid" id="grid"></div>
+</div>
+
+<footer>Manifest data from BStock · Item images via Unsplash search · Product links to Costco.com</footer>
+
+<script>
+// Helper: instacart image URL at chosen size
+const SD = (id, ext='jpeg') => `https://www.instacart.com/image-server/400x400/filters:fill(FFFFFF,true):format(jpg)/d2lnr5mha7bycj.cloudfront.net/product-image/file/large_${id}.${ext}`;
+
+const items = [
+  {desc:"150FT SMART TUBE SUNCAST", qty:4, unit:79.99, ext:319.96, vendor:"SUNCAST CORPORATION", category:"Gardening", item:"1779678", costcoImg:SD("d546f350-5e04-4166-af1b-86cbb7d57cc9")},
+  {desc:"BLACKSTONE 28IN GRIDDLE", qty:1, unit:279.99, ext:279.99, vendor:"NORTH ATLANTIC IMPORTS", category:"Outdoor Cooking", item:"1934070", costcoImg:"https://bfasset.costco-static.com/U447IH35/as/rx4wb5xhp2cw8x23qn9/4000392764-847__1"},
+  {desc:"GORILLA POLY DUMP CART", qty:1, unit:249.99, ext:249.99, vendor:"TRICAM INDUSTRIES", category:"Gardening", item:"1879605", costcoImg:"https://bfasset.costco-static.com/U447IH35/as/btxv4jp3z3zrjvvms7qrr/4000311897-847__1"},
+  {desc:"SPRUCE SW BROWN PLANTER", qty:1, unit:239.99, ext:239.99, vendor:"DOBI AND ASSOCIATES", category:"Gardening", item:"1533875", costcoImg:"https://bfasset.costco-static.com/U447IH35/as/v8km4x3765jksfnjc3q424fg/4000406472-847__1"},
+  {desc:"TANGENT CLASSIC ADIRONDACK", qty:1, unit:149.99, ext:149.99, vendor:"BRENTWOOD ORIGINALS", category:"Patio Furniture", item:"1975272", costcoImg:SD("c15f97df-f025-49e9-b2a8-b6d8887b95b7")},
+  {desc:"VERADEK CAPRI PLANTER", qty:1, unit:99.99, ext:99.99, vendor:"VERADEK INC", category:"Gardening", item:"1771753", costcoImg:SD("ef20ce2d-19c9-47d2-b712-22f0e467317f")},
+  {desc:'VERADEK MIDLAND 24"', qty:3, unit:25.99, ext:77.97, vendor:"VERADEK INC", category:"Gardening", item:"1852019", costcoImg:SD("ef20ce2d-19c9-47d2-b712-22f0e467317f")},
+  {desc:"FISKARS 12' POLE PRUNER", qty:1, unit:47.99, ext:47.99, vendor:"FISKARS INC", category:"Gardening", item:"1967227", costcoImg:"https://bfasset.costco-static.com/U447IH35/as/grc896rv6pptj8vb668qhkq/4000218638-847_1"},
+  {desc:"LED SHOPLIGHT W/ REMOTE", qty:2, unit:19.99, ext:39.98, vendor:"ADC SOLUTIONS HARDWARE", category:"Lighting", item:"1600034", costcoImg:SD("87375865-7ac6-4c19-907a-fee7ef81ddca","webp")},
+  {desc:"TEST RITE SOLAR BOLLARD", qty:1, unit:29.99, ext:29.99, vendor:"TEST RITE INTERNATIONAL", category:"Landscape Lighting", item:"1972139", costcoImg:SD("8846e541-0041-4c45-87c4-1c28d30f398a")},
+  {desc:"10'X20' STEEL FRAME", qty:1, unit:299.99, ext:299.99, vendor:"ZHEJIANG ZHENGTE", category:"Storage", item:"2323073", costcoImg:"https://bfasset.costco-static.com/U447IH35/as/hpbs2jcxjtnwbv9cc6gb693x/4201008343-847__1"},
+  {desc:"FEIT SHOP LIGHT 2PK", qty:3, unit:64.99, ext:194.97, vendor:"FEIT ELECTRIC", category:"Lighting", item:"1997766", costcoImg:SD("87375865-7ac6-4c19-907a-fee7ef81ddca","webp")},
+  {desc:"VERADEK BRIXTON 28IN", qty:1, unit:119.99, ext:119.99, vendor:"VERADEK INC", category:"Gardening", item:"1662959", costcoImg:SD("ef20ce2d-19c9-47d2-b712-22f0e467317f")},
+  {desc:"SOLAR LED FLAMINGO 2PK", qty:2, unit:49.99, ext:99.98, vendor:"EVERGREEN ENTERPRISES", category:"Outdoor Decor", item:"1933884", costcoImg:SD("6d080e76-3fc6-4400-9ca0-7b8bcab32732")},
+  {desc:"SUNCAST 8'X7' SHED", qty:1, unit:999.99, ext:999.99, vendor:"SUNCAST CORPORATION", category:"Gardening", item:"1997590", costcoImg:"https://bfasset.costco-static.com/U447IH35/as/cnj3fh9fv64cxf7zjv4f/4000210390-847_gray_1"},
+  {desc:"SUNVILLA 13FT RND 3-TIER UMBRELLA", qty:1, unit:859.99, ext:859.99, vendor:"SUNVILLA CORPORATION", category:"Patio Furniture", item:"1934171", costcoImg:"https://bfasset.costco-static.com/U447IH35/as/q3gsbq92hrtfbvkwc94994s/4000417255-847_tan_1"},
+  {desc:"BLACKSTONE 22IN GRIDDLE", qty:5, unit:145.99, ext:729.95, vendor:"NORTH ATLANTIC IMPORTS", category:"Outdoor Cooking", item:"1934203", costcoImg:SD("3dacb557-786b-4bec-9918-7c7339f5d226")},
+  {desc:"11' CABANA UMBRELLA", qty:1, unit:214.99, ext:214.99, vendor:"SUNVILLA CORPORATION", category:"Patio Furniture", item:"1768212", costcoImg:"https://bfasset.costco-static.com/U447IH35/as/fbj8tkqzhpxs4nr8gwct9kw/4000244118-847_beige_1"},
+  {desc:"SUNVILLA 11' CABANA UMBRELLA", qty:1, unit:189.99, ext:189.99, vendor:"SUNVILLA CORPORATION", category:"Patio Furniture", item:"1752002", costcoImg:"https://bfasset.costco-static.com/U447IH35/as/fbj8tkqzhpxs4nr8gwct9kw/4000244118-847_beige_1"},
+  {desc:"STRING LIGHT POLE 2PK", qty:2, unit:79.99, ext:159.98, vendor:"GENERAL PRINTING AND DESIGN", category:"Lighting", item:"1806351", costcoImg:SD("4f2e64b0-bf2b-47ba-b400-96a626a78876")},
+  {desc:"GTX SOLAR PATHWAY LIGHTS", qty:4, unit:34.99, ext:139.96, vendor:"GTX BRANDS", category:"Landscape Lighting", item:"1937955", costcoImg:SD("6e6d8470-0373-432f-8562-b182cbf89283")},
+  {desc:"FEIT SHOP LIGHT 1PK", qty:3, unit:29.99, ext:89.97, vendor:"FEIT ELECTRIC", category:"Lighting", item:"1806331", costcoImg:SD("87375865-7ac6-4c19-907a-fee7ef81ddca","webp")},
+  {desc:"KODA MULTI DIRECTIONAL", qty:2, unit:29.99, ext:59.98, vendor:"ADC SOLUTIONS HARDWARE", category:"Lighting", item:"1675983", costcoImg:SD("0128065a-2260-4698-ab64-f96de3812722")},
+  {desc:"FLEXTREME 100' HOSE GREEN", qty:1, unit:27.99, ext:27.99, vendor:"US WIRE AND CABLE", category:"Gardening", item:"1876325", costcoImg:SD("fd00aa80-a1a2-4245-bf56-912259b58e78")}
+];
+
+const grid = document.getElementById('grid');
+const search = document.getElementById('search');
+let activeCategory = 'all';
+let searchTerm = '';
+
+function costcoSearchURL(desc) {
+  return 'https://www.costco.com/CatalogSearch?dept=All&keyword=' + encodeURIComponent(desc);
+}
+function imageURL(it) {
+  return it.costcoImg;
+}
+function hash(s) { let h=0; for (let i=0;i<s.length;i++) h=((h<<5)-h)+s.charCodeAt(i)|0; return h; }
+function googleImagesURL(desc) {
+  return 'https://www.google.com/search?tbm=isch&q=' + encodeURIComponent('costco ' + desc);
+}
+
+// Inline SVG illustrations per category — always render
+const ILLUSTRATIONS = {
+  "Gardening": `<svg class="illust" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><path d="M50 85 L50 50" stroke="#15803d" stroke-width="4" fill="none"/><ellipse cx="50" cy="45" rx="22" ry="14" fill="#22c55e"/><ellipse cx="35" cy="38" rx="14" ry="10" fill="#16a34a"/><ellipse cx="65" cy="38" rx="14" ry="10" fill="#16a34a"/><path d="M30 85 L70 85 L65 95 L35 95 Z" fill="#92400e"/></svg>`,
+  "Outdoor Cooking": `<svg class="illust" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><rect x="20" y="40" width="60" height="30" rx="4" fill="#1f2937"/><rect x="22" y="42" width="56" height="6" fill="#dc2626"/><circle cx="35" cy="58" r="3" fill="#fbbf24"/><circle cx="50" cy="58" r="3" fill="#fbbf24"/><circle cx="65" cy="58" r="3" fill="#fbbf24"/><path d="M30 70 L30 88 M70 70 L70 88" stroke="#1f2937" stroke-width="3"/><path d="M40 35 Q42 25 40 18 M50 35 Q52 25 50 18 M60 35 Q62 25 60 18" stroke="#94a3b8" stroke-width="2" fill="none"/></svg>`,
+  "Patio Furniture": `<svg class="illust" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><path d="M50 15 L20 45 L80 45 Z" fill="#f59e0b"/><rect x="48" y="45" width="4" height="40" fill="#78716c"/><path d="M30 78 L30 90 M70 78 L70 90" stroke="#78716c" stroke-width="3"/><rect x="25" y="76" width="50" height="4" fill="#a8a29e"/></svg>`,
+  "Lighting": `<svg class="illust" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><path d="M50 20 L35 55 L65 55 Z" fill="#facc15"/><rect x="42" y="55" width="16" height="6" fill="#78716c"/><rect x="46" y="61" width="8" height="20" fill="#1f2937"/><circle cx="50" cy="40" r="6" fill="#fef9c3"/><path d="M25 35 L20 30 M75 35 L80 30 M20 50 L15 50 M80 50 L85 50" stroke="#facc15" stroke-width="2"/></svg>`,
+  "Landscape Lighting": `<svg class="illust" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><rect x="46" y="50" width="8" height="35" fill="#475569"/><circle cx="50" cy="40" r="14" fill="#fef08a" opacity=".9"/><circle cx="50" cy="40" r="8" fill="#facc15"/><path d="M30 88 L70 88" stroke="#16a34a" stroke-width="3"/><path d="M30 90 Q50 85 70 90" fill="#16a34a"/></svg>`,
+  "Outdoor Decor": `<svg class="illust" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><circle cx="35" cy="35" r="8" fill="#ec4899"/><path d="M35 43 Q30 50 32 60 L38 60 Q40 50 35 43" fill="#ec4899"/><path d="M32 60 L32 80 M38 60 L38 80" stroke="#1f2937" stroke-width="2"/><circle cx="65" cy="50" r="6" fill="#f472b6"/><path d="M65 56 L65 80" stroke="#1f2937" stroke-width="2"/><path d="M20 85 L80 85" stroke="#16a34a" stroke-width="3"/></svg>`,
+  "Storage": `<svg class="illust" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><path d="M20 45 L50 25 L80 45 L80 80 L20 80 Z" fill="#94a3b8"/><path d="M20 45 L50 25 L80 45" fill="none" stroke="#475569" stroke-width="2"/><rect x="42" y="55" width="16" height="25" fill="#475569"/><circle cx="54" cy="68" r="1.5" fill="#fbbf24"/></svg>`
+};
+function categoryIllust(cat) {
+  return ILLUSTRATIONS[cat] || ILLUSTRATIONS["Gardening"];
+}
+function catClass(cat) { return 'cat-' + cat.replace(/\s+/g,'-'); }
+
+function render() {
+  const filtered = items.filter(it => {
+    const catMatch = activeCategory === 'all' || it.category === activeCategory;
+    const term = searchTerm.toLowerCase();
+    const txtMatch = !term ||
+      it.desc.toLowerCase().includes(term) ||
+      it.vendor.toLowerCase().includes(term) ||
+      it.category.toLowerCase().includes(term);
+    return catMatch && txtMatch;
+  }).sort((a, b) => b.qty - a.qty || b.ext - a.ext);
+
+  if (filtered.length === 0) {
+    grid.innerHTML = '<div class="empty">No items match your filter.</div>';
+    return;
+  }
+
+  grid.innerHTML = filtered.map(it => `
+    <article class="card">
+      <div class="img-wrap ${catClass(it.category)}">
+        ${categoryIllust(it.category)}
+        <img src="${imageURL(it)}" alt="${it.desc}" loading="lazy" referrerpolicy="no-referrer"
+             style="position:absolute;inset:0;width:100%;height:100%;object-fit:contain;background:white;padding:8px;"
+             onerror="this.style.display='none'" />
+        <span class="qty-badge">×${it.qty}</span>
+      </div>
+      <div class="body">
+        <div class="desc">${it.desc}</div>
+        <div class="vendor">${it.vendor}</div>
+        <div class="meta">
+          <span class="tag">${it.category}</span>
+          <span class="tag cond">Used – Good</span>
+        </div>
+        <div class="pricing">
+          <span class="unit-retail">$${it.unit.toFixed(2)} ea</span>
+          <span class="ext-retail">$${it.ext.toFixed(2)}</span>
+        </div>
+        <div class="actions">
+          <a class="btn btn-primary" href="${costcoSearchURL(it.desc)}" target="_blank" rel="noopener">Costco</a>
+          <a class="btn btn-secondary" href="${googleImagesURL(it.desc)}" target="_blank" rel="noopener">Images</a>
+        </div>
+      </div>
+    </article>
+  `).join('');
+}
+
+document.querySelectorAll('.filter-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    activeCategory = btn.dataset.cat;
+    render();
+  });
+});
+
+search.addEventListener('input', e => {
+  searchTerm = e.target.value;
+  render();
+});
+
+render();
+</script>
+</body>
+</html>

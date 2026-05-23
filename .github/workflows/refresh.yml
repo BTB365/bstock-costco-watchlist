@@ -1,0 +1,30 @@
+name: Refresh BStock data
+on:
+  schedule:
+    # 8:30 AM America/Denver during MDT = 14:30 UTC
+    - cron: '30 14 * * *'
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: '22' }
+      - run: npm install
+      - run: npx playwright install --with-deps chromium
+      - name: Refresh BStock snapshot
+        env:
+          BSTOCK_EMAIL: ${{ secrets.BSTOCK_EMAIL }}
+          BSTOCK_PASSWORD: ${{ secrets.BSTOCK_PASSWORD }}
+          BSTOCK_SAVED_SEARCH_URL: https://bstock.com/all-auctions?savedSearchId=696e3b9488671096827bcdd8
+        run: npm run refresh
+      - name: Commit refreshed data
+        run: |
+          git config user.name "bstock-refresh-bot"
+          git config user.email "actions@github.com"
+          git add data/listings.json
+          git commit -m "Refresh BStock listings" || exit 0
+          git push
