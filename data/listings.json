@@ -166,8 +166,9 @@
           "condition": "USED_GOOD",
           "lotId": "6750652",
           "location": "1993",
-          "img": "",
-          "costcoUrl": "https://sameday.costco.com/search?search_term=1919326"
+          "img": "https://www.instacart.com/assets/domains/product-image/file/large_c93d8d8a-7b71-47d4-9ed3-17010f656754.webp",
+          "costcoUrl": "https://sameday.costco.com/search?search_term=1919326",
+          "imgSource": "Costco SameDay / Instacart item-number match"
         },
         {
           "item": "1079891",
@@ -234,8 +235,9 @@
           "condition": "USED_GOOD",
           "lotId": "6750652",
           "location": "1993",
-          "img": "",
-          "costcoUrl": "https://sameday.costco.com/search?search_term=55872"
+          "img": "https://www.instacart.com/assets/domains/product-image/file/large_b07cadf0-8cca-4f91-b063-a3054b998878.jpeg",
+          "costcoUrl": "https://sameday.costco.com/search?search_term=55872",
+          "imgSource": "Costco SameDay / Instacart item-number match"
         },
         {
           "item": "12251",
@@ -319,8 +321,9 @@
           "condition": "USED_GOOD",
           "lotId": "6750652",
           "location": "1993",
-          "img": "",
-          "costcoUrl": "https://sameday.costco.com/search?search_term=3451400"
+          "img": "https://www.instacart.com/assets/domains/product-image/file/large_40b2f5c4-452a-47d0-bfbd-bdf63a28e639.jpeg",
+          "costcoUrl": "https://sameday.costco.com/search?search_term=3451400",
+          "imgSource": "Costco SameDay / Instacart item-number match"
         },
         {
           "item": "221663",
@@ -420,6 +423,7 @@
       "href": "https://bstock.com/buy/listings/details/6a105a87fa68fde594966f63",
       "id": "6a105a87fa68fde594966f63",
       "images": [
+        "https://d2lnr5mha7bycj.cloudfront.net/product-image/file/large_6e6d8470-0373-432f-8562-b182cbf89283.jpeg",
         "https://d2lnr5mha7bycj.cloudfront.net/product-image/file/large_4f2e64b0-bf2b-47ba-b400-96a626a78876.jpeg",
         "https://d2lnr5mha7bycj.cloudfront.net/product-image/file/large_c7532f2d-6e99-4040-9b30-1a582d17f4a8.jpeg",
         "https://www.instacart.com/assets/domains/product-image/file/large_61a5006b-5ce7-42bd-906b-347581d03a5d.jpeg",
@@ -493,7 +497,7 @@
           "condition": "USED_GOOD",
           "lotId": "6750645",
           "location": "1993",
-          "img": "",
+          "img": "https://d2lnr5mha7bycj.cloudfront.net/product-image/file/large_6e6d8470-0373-432f-8562-b182cbf89283.jpeg",
           "costcoUrl": "https://sameday.costco.com/search?search_term=1937955"
         },
         {
@@ -578,8 +582,9 @@
           "condition": "USED_GOOD",
           "lotId": "6750645",
           "location": "1993",
-          "img": "",
-          "costcoUrl": "https://sameday.costco.com/search?search_term=710090"
+          "img": "https://www.instacart.com/assets/domains/product-image/file/large_cd0e161c-8ca6-4a4b-8d6e-ef76bd3b21f4.webp",
+          "costcoUrl": "https://sameday.costco.com/search?search_term=710090",
+          "imgSource": "Costco SameDay / Instacart item-number match"
         },
         {
           "item": "1806288",
@@ -595,8 +600,9 @@
           "condition": "USED_GOOD",
           "lotId": "6750645",
           "location": "1993",
-          "img": "",
-          "costcoUrl": "https://sameday.costco.com/search?search_term=1806288"
+          "img": "https://www.instacart.com/assets/domains/product-image/file/large_9d1a8864-5c54-4fd9-9636-4ac3fb30704a.jpeg",
+          "costcoUrl": "https://sameday.costco.com/search?search_term=1806288",
+          "imgSource": "Costco SameDay / Instacart item-number match"
         },
         {
           "item": "2323037",
@@ -680,8 +686,9 @@
           "condition": "USED_GOOD",
           "lotId": "6750645",
           "location": "1993",
-          "img": "",
-          "costcoUrl": "https://sameday.costco.com/search?search_term=1928707"
+          "img": "https://www.instacart.com/assets/domains/product-image/file/large_ef33ffc6-2f82-464f-ac6d-3f8b2eaad083.jpeg",
+          "costcoUrl": "https://sameday.costco.com/search?search_term=1928707",
+          "imgSource": "Costco SameDay / Instacart item-number match"
         },
         {
           "item": "1806320",
@@ -714,8 +721,9 @@
           "condition": "USED_GOOD",
           "lotId": "6750645",
           "location": "1993",
-          "img": "",
-          "costcoUrl": "https://sameday.costco.com/search?search_term=1750832"
+          "img": "https://www.instacart.com/assets/domains/product-image/file/large_2c3008db-ad54-4998-8ca1-42e2d334d39c.jpeg",
+          "costcoUrl": "https://sameday.costco.com/search?search_term=1750832",
+          "imgSource": "Costco SameDay / Instacart item-number match"
         },
         {
           "item": "1859466",
@@ -1039,8 +1047,9 @@
           "condition": "USED_GOOD",
           "lotId": "6747831",
           "location": "1993",
-          "img": "",
-          "costcoUrl": "https://sameday.costco.com/search?search_term=1852019"
+          "img": "https://www.instacart.com/assets/domains/product-image/file/large_ef20ce2d-19c9-47d2-b712-22f0e467317f.jpeg",
+          "costcoUrl": "https://sameday.costco.com/search?search_term=1852019",
+          "imgSource": "Costco SameDay / Instacart item-number match"
         },
         {
           "item": "1807247",
@@ -1124,8 +1133,9 @@
           "condition": "USED_GOOD",
           "lotId": "6747831",
           "location": "1993",
-          "img": "",
-          "costcoUrl": "https://sameday.costco.com/search?search_term=1184115"
+          "img": "https://www.instacart.com/assets/domains/product-image/file/large_ff762928-b307-44a3-867d-b61d8243c90c.jpeg",
+          "costcoUrl": "https://sameday.costco.com/search?search_term=1184115",
+          "imgSource": "Costco SameDay / Instacart item-number match"
         },
         {
           "item": "1879605",
@@ -1192,8 +1202,9 @@
           "condition": "USED_GOOD",
           "lotId": "6747831",
           "location": "1993",
-          "img": "",
-          "costcoUrl": "https://sameday.costco.com/search?search_term=1934203"
+          "img": "https://www.instacart.com/assets/domains/product-image/file/large_020ac676-3a4b-4882-956f-0aa4d7b30c7d.jpeg",
+          "costcoUrl": "https://sameday.costco.com/search?search_term=1934203",
+          "imgSource": "Costco SameDay / Instacart item-number match"
         },
         {
           "item": "1840633",

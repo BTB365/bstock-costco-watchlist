@@ -6,6 +6,7 @@
   "href": "https://bstock.com/buy/listings/details/6a105a87fa68fde594966f63",
   "id": "6a105a87fa68fde594966f63",
   "images": [
+    "https://d2lnr5mha7bycj.cloudfront.net/product-image/file/large_6e6d8470-0373-432f-8562-b182cbf89283.jpeg",
     "https://docserv.bstock.com/v1/documents/68e02d2cb3d42e49a3d563f5"
   ],
   "items": [
@@ -67,7 +68,9 @@
       "model": "",
       "qty": 9,
       "unit": 34.99,
-      "vendor": "GTX BRANDS LIMITED"
+      "vendor": "GTX BRANDS LIMITED",
+      "img": "https://d2lnr5mha7bycj.cloudfront.net/product-image/file/large_6e6d8470-0373-432f-8562-b182cbf89283.jpeg",
+      "costcoUrl": "https://sameday.costco.com/search?search_term=1937955"
     },
     {
       "brand": "",

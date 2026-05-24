@@ -13,7 +13,7 @@ jobs:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with: { node-version: '22' }
-      - run: npm install
+      - run: npm ci || npm install
       - run: npx playwright install --with-deps chromium
       - name: Refresh BStock snapshot
         env:
@@ -25,6 +25,16 @@ jobs:
         run: |
           git config user.name "bstock-refresh-bot"
           git config user.email "actions@github.com"
-          git add data/listings.json
+          git add data/listings.json data/listing*.json
           git commit -m "Refresh BStock listings" || exit 0
           git push
+      - name: Deploy to Netlify when token secrets are available
+        env:
+          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+          NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
+        run: |
+          if [ -z "$NETLIFY_AUTH_TOKEN" ] || [ -z "$NETLIFY_SITE_ID" ]; then
+            echo "Netlify token/site secrets not set; relying on Git-connected Netlify auto deploy."
+            exit 0
+          fi
+          npx netlify-cli deploy --prod --dir . --site "$NETLIFY_SITE_ID" --auth "$NETLIFY_AUTH_TOKEN"
