@@ -9,7 +9,11 @@
       "href": "https://bstock.com/buy/listings/details/6a105a8f88061006c7438bfa",
       "id": "6a105a8f88061006c7438bfa",
       "images": [
-        "https://docserv.bstock.com/v1/documents/68e02d2cb3d42e49a3d563f5"
+        "https://d2lnr5mha7bycj.cloudfront.net/product-image/file/large_080bba2a-dfa6-41ef-8541-819a2a0f7d7c.webp",
+        "https://d2lnr5mha7bycj.cloudfront.net/product-image/file/large_0c06691b-334a-4548-8e0b-018c3d70a329.jpeg",
+        "https://d2lnr5mha7bycj.cloudfront.net/product-image/file/large_4678423b-8767-4057-bba7-564a3b738a60.jpeg",
+        "https://d2lnr5mha7bycj.cloudfront.net/product-image/file/large_2c704bae-9e54-469c-ae1e-59a9bf596781.jpeg",
+        "https://d2lnr5mha7bycj.cloudfront.net/product-image/file/large_1b4ba213-9594-4f3c-9707-0b81ea63384c.webp"
       ],
       "items": [
         {
@@ -416,7 +420,12 @@
       "href": "https://bstock.com/buy/listings/details/6a105a87fa68fde594966f63",
       "id": "6a105a87fa68fde594966f63",
       "images": [
-        "https://docserv.bstock.com/v1/documents/68e02d2cb3d42e49a3d563f5"
+        "https://d2lnr5mha7bycj.cloudfront.net/product-image/file/large_4f2e64b0-bf2b-47ba-b400-96a626a78876.jpeg",
+        "https://d2lnr5mha7bycj.cloudfront.net/product-image/file/large_c7532f2d-6e99-4040-9b30-1a582d17f4a8.jpeg",
+        "https://www.instacart.com/assets/domains/product-image/file/large_61a5006b-5ce7-42bd-906b-347581d03a5d.jpeg",
+        "https://www.instacart.com/assets/domains/product-image/file/large_d6318f62-9f64-406e-b7fa-93c687ad77e6.webp",
+        "https://www.instacart.com/assets/domains/product-image/file/large_7dcf240a-76e1-4dc8-8359-f3ae8bd142ba.webp",
+        "https://d2lnr5mha7bycj.cloudfront.net/product-image/file/large_d6318f62-9f64-406e-b7fa-93c687ad77e6.webp"
       ],
       "items": [
         {
@@ -501,7 +510,7 @@
           "condition": "USED_GOOD",
           "lotId": "6750645",
           "location": "1993",
-          "img": "",
+          "img": "https://d2lnr5mha7bycj.cloudfront.net/product-image/file/large_d6318f62-9f64-406e-b7fa-93c687ad77e6.webp",
           "costcoUrl": "https://sameday.costco.com/search?search_term=1934126"
         },
         {
@@ -518,7 +527,7 @@
           "condition": "USED_GOOD",
           "lotId": "6750645",
           "location": "1993",
-          "img": "",
+          "img": "https://d2lnr5mha7bycj.cloudfront.net/product-image/file/large_7dcf240a-76e1-4dc8-8359-f3ae8bd142ba.webp",
           "costcoUrl": "https://sameday.costco.com/search?search_term=1806359"
         },
         {
@@ -976,7 +985,10 @@
       "href": "https://bstock.com/buy/listings/details/6a105a88fa68fde594966f76",
       "id": "6a105a88fa68fde594966f76",
       "images": [
-        "https://docserv.bstock.com/v1/documents/68e02d2cb3d42e49a3d563f5"
+        "https://www.instacart.com/assets/domains/product-image/file/large_d546f350-5e04-4166-af1b-86cbb7d57cc9.jpeg",
+        "https://www.instacart.com/assets/domains/product-image/file/large_d6318f62-9f64-406e-b7fa-93c687ad77e6.webp",
+        "https://d2lnr5mha7bycj.cloudfront.net/product-image/file/large_d546f350-5e04-4166-af1b-86cbb7d57cc9.jpeg",
+        "https://d2lnr5mha7bycj.cloudfront.net/product-image/file/large_d6318f62-9f64-406e-b7fa-93c687ad77e6.webp"
       ],
       "items": [
         {
@@ -993,7 +1005,7 @@
           "condition": "USED_GOOD",
           "lotId": "6747831",
           "location": "1993",
-          "img": "",
+          "img": "https://d2lnr5mha7bycj.cloudfront.net/product-image/file/large_d546f350-5e04-4166-af1b-86cbb7d57cc9.jpeg",
           "costcoUrl": "https://sameday.costco.com/search?search_term=1779678"
         },
         {
@@ -1520,7 +1532,7 @@
           "condition": "USED_GOOD",
           "lotId": "6747831",
           "location": "1993",
-          "img": "",
+          "img": "https://d2lnr5mha7bycj.cloudfront.net/product-image/file/large_d6318f62-9f64-406e-b7fa-93c687ad77e6.webp",
           "costcoUrl": "https://sameday.costco.com/search?search_term=1934126"
         },
         {
@@ -1698,5 +1710,6 @@
       "uniqueBidders": 2,
       "units": 75
     }
-  ]
+  ],
+  "imageFixNote": "Removed BStock docserv/legal-document URLs from galleries; listing images now use verified Costco/SameDay product images when available."
 }
