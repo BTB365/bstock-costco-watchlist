@@ -32,6 +32,14 @@ async function existingData() {
   catch { return { listings: [] }; }
 }
 
+async function deleteGeneratedListingFiles() {
+  const dataDir = new URL('../data/', import.meta.url);
+  try {
+    const names = await fs.readdir(dataDir);
+    await Promise.all(names.filter(n => /^listing\d+\.json$/.test(n)).map(n => fs.unlink(new URL(n, dataDir)).catch(() => {})));
+  } catch {}
+}
+
 async function safeClick(page, selector, opts={}) {
   const loc = page.locator(selector).first();
   if (await loc.count()) {
@@ -285,7 +293,22 @@ async function main() {
   try {
     await loginIfNeeded(page);
     const links = await collectListingLinks(page);
-    if (!links.length) throw new Error('No listing links found on saved search page after login.');
+    if (!links.length) {
+      const finalUrl = page.url();
+      const pageTitle = await page.title().catch(() => '');
+      const bodySnippet = clean((await page.textContent('body').catch(() => '') || '')).slice(0, 500);
+      console.log(`No listing links found on saved search page after login. URL=${finalUrl} Title=${pageTitle}`);
+      existing.lastRefreshAttempt = new Date().toISOString();
+      existing.snapshot = new Date().toISOString();
+      existing.refreshStatus = 'ok-empty';
+      existing.refreshNote = 'No active listing links were returned by the saved search at refresh time.';
+      existing.refreshDiagnostics = { url: finalUrl, title: pageTitle, bodySnippet };
+      existing.refreshErrors = [];
+      existing.listings = [];
+      await fs.writeFile(DATA_PATH, JSON.stringify(existing, null, 2));
+      await deleteGeneratedListingFiles();
+      return;
+    }
     for (const [idx, link] of links.entries()) {
       try {
         console.log(`Scraping ${idx+1}/${links.length}: ${link.href}`);
@@ -298,16 +321,22 @@ async function main() {
   }
 
   if (!listings.length) {
-    existing.lastRefreshAttempt = new Date().toISOString();
-    existing.refreshStatus = 'failed-no-listings';
-    existing.refreshErrors = errors.slice(0, 20);
-    await fs.writeFile(DATA_PATH, JSON.stringify(existing, null, 2));
-    throw new Error(`Refresh found no active listings. ${errors.join(' | ')}`);
+    const next = {
+      snapshot: new Date().toISOString(),
+      refreshStatus: errors.length ? 'ok-empty-with-errors' : 'ok-empty',
+      refreshErrors: errors.slice(0, 20),
+      listings: []
+    };
+    await fs.writeFile(DATA_PATH, JSON.stringify(next, null, 2));
+    await deleteGeneratedListingFiles();
+    console.log(`Refresh complete: no active listings. ${errors.length} listing scrape errors.`);
+    return;
   }
 
   listings.sort((a,b) => (new Date(a.endTime || 0)) - (new Date(b.endTime || 0)));
   const next = { snapshot: new Date().toISOString(), refreshStatus: errors.length ? 'partial' : 'ok', refreshErrors: errors.slice(0, 20), listings };
   await fs.writeFile(DATA_PATH, JSON.stringify(next, null, 2));
+  await deleteGeneratedListingFiles();
   for (const [i,l] of listings.entries()) await fs.writeFile(new URL(`../data/listing${i}.json`, import.meta.url), JSON.stringify(l, null, 2));
   console.log(`Refresh complete: ${listings.length} active listings, ${errors.length} errors.`);
 }
