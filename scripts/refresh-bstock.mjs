@@ -298,15 +298,16 @@ async function main() {
       const pageTitle = await page.title().catch(() => '');
       const bodySnippet = clean((await page.textContent('body').catch(() => '') || '')).slice(0, 500);
       console.log(`No listing links found on saved search page after login. URL=${finalUrl} Title=${pageTitle}`);
+      const blocked = /just a moment|cloudflare|security verification|verify|captcha|enable javascript and cookies/i.test(`${pageTitle} ${bodySnippet}`);
       existing.lastRefreshAttempt = new Date().toISOString();
-      existing.snapshot = new Date().toISOString();
-      existing.refreshStatus = 'ok-empty';
-      existing.refreshNote = 'No active listing links were returned by the saved search at refresh time.';
+      existing.snapshot = existing.snapshot || new Date().toISOString();
+      existing.refreshStatus = blocked ? 'blocked-preserved' : 'ok-empty-preserved';
+      existing.refreshNote = blocked
+        ? 'BStock/Cloudflare returned a verification page, so the previous listing snapshot was preserved instead of being erased.'
+        : 'No active listing links were returned by the saved search; previous snapshot preserved to avoid accidental data loss.';
       existing.refreshDiagnostics = { url: finalUrl, title: pageTitle, bodySnippet };
       existing.refreshErrors = [];
-      existing.listings = [];
       await fs.writeFile(DATA_PATH, JSON.stringify(existing, null, 2));
-      await deleteGeneratedListingFiles();
       return;
     }
     for (const [idx, link] of links.entries()) {
@@ -321,15 +322,23 @@ async function main() {
   }
 
   if (!listings.length) {
-    const next = {
-      snapshot: new Date().toISOString(),
-      refreshStatus: errors.length ? 'ok-empty-with-errors' : 'ok-empty',
-      refreshErrors: errors.slice(0, 20),
-      listings: []
-    };
+    const next = errors.length
+      ? {
+          ...existing,
+          lastRefreshAttempt: new Date().toISOString(),
+          refreshStatus: 'scrape-errors-preserved',
+          refreshNote: 'BStock listing links were found, but detail scraping failed. Previous snapshot was preserved instead of being erased.',
+          refreshErrors: errors.slice(0, 20)
+        }
+      : {
+          ...existing,
+          lastRefreshAttempt: new Date().toISOString(),
+          refreshStatus: 'ok-empty-preserved',
+          refreshNote: 'No active listings were scraped; previous snapshot was preserved instead of being erased.',
+          refreshErrors: []
+        };
     await fs.writeFile(DATA_PATH, JSON.stringify(next, null, 2));
-    await deleteGeneratedListingFiles();
-    console.log(`Refresh complete: no active listings. ${errors.length} listing scrape errors.`);
+    console.log(`Refresh complete: no new active listings. Preserved previous snapshot. ${errors.length} listing scrape errors.`);
     return;
   }
 
