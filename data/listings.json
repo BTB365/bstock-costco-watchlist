@@ -1293,10 +1293,10 @@
   "refreshNote": "BStock/Cloudflare returned a verification page, so the previous listing snapshot was preserved instead of being erased.",
   "manifestCoverage": "BStock preview rows are included where the full manifest endpoint is not externally available.",
   "refreshErrors": [],
-  "lastRefreshAttempt": "2026-06-26T15:25:51.108Z",
+  "lastRefreshAttempt": "2026-06-27T14:45:19.052Z",
   "refreshDiagnostics": {
     "url": "https://bstock.com/all-auctions?savedSearchId=696e3b9488671096827bcdd8",
     "title": "Just a moment...",
-    "bodySnippet": "bstock.comPerforming security verificationThis website uses a security service to protect against malicious bots. This page is displayed while the website verifies you are not a bot.Verification successful. Waiting for bstock.com to respond<div class=\"h2\"><span id=\"challenge-error-text\">Enable JavaScript and cookies to continue</span></div>(function(){window._cf_chl_opt = {cFPWv: 'b',cH: 'rBVsL7j22hPwNTBixeGbNy9fulEq9sm0_WplZNss5jU-1782487538-1.2.1.1-j6.jn4PRnGnjlaXHC5o7OEyjRuQbx6T5HtJH2rD6EO40j"
+    "bodySnippet": "bstock.comPerforming security verificationThis website uses a security service to protect against malicious bots. This page is displayed while the website verifies you are not a bot.Verification successful. Waiting for bstock.com to respond<div class=\"h2\"><span id=\"challenge-error-text\">Enable JavaScript and cookies to continue</span></div>(function(){window._cf_chl_opt = {cFPWv: 'b',cH: 'Iz.tKaDdXjUszIAFMWJUsJgYLPx4rfq9OJpMT1HQVOY-1782571506-1.2.1.1-qaLOngcD1dwFiw.dVVJ1l03Z7j33cc1JoD51uEjlHW_0g"
   }
 }
