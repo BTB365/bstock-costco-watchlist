@@ -1293,10 +1293,10 @@
   "refreshNote": "BStock/Cloudflare returned a verification page, so the previous listing snapshot was preserved instead of being erased.",
   "manifestCoverage": "BStock preview rows are included where the full manifest endpoint is not externally available.",
   "refreshErrors": [],
-  "lastRefreshAttempt": "2026-11-11T20:03:45.176Z",
+  "lastRefreshAttempt": "2026-11-12T20:41:55.838Z",
   "refreshDiagnostics": {
     "url": "https://bstock.com/all-auctions?savedSearchId=696e3b9488671096827bcdd8",
     "title": "Just a moment...",
-    "bodySnippet": "Verification successful. Waiting for bstock.com to respond<div class=\"h2\"><span id=\"challenge-error-text\">Enable JavaScript and cookies to continue</span></div>(function(){window._cf_chl_opt = {cFPWv: 'b',cH: 'iCM.EECEsZ_bqCfEvy.gyQRK1B3vUvhNO_3oDE0Bl1k-1794427412-1.2.1.1-BNGopE2vl7UHU.neAe8yk.R9E_PiVzXaMDnmKIh2r9_P0pe3Lv7dOWo0ZSrnno_p',cITimeS: '1794427412',cRay: 'a58fe6a28b490432',cTplC:1,cTplO:0,cTplV:5,cType: 'managed',cUPMDTk:\"/all-auctions?savedSearchId=696e3b9488671096827bcdd8\\u0026__cf_c"
+    "bodySnippet": "Verification successful. Waiting for bstock.com to respond<div class=\"h2\"><span id=\"challenge-error-text\">Enable JavaScript and cookies to continue</span></div>(function(){window._cf_chl_opt = {cFPWv: 'g',cH: '6ShCEgiKfn3iJaW5PlgYdD8k0TLBI6NSNg_sgNWQJHE-1794516103-1.2.1.1-XDjgaK9p1kL1xC6ISfAvvv2tWvx1fqqCy_9i9C17PZXl1ugnSU8FoDeClxPfYBqW',cITimeS: '1794516103',cRay: 'a5985bef1bd0e76a',cTplC:1,cTplO:0,cTplV:5,cType: 'managed',cUPMDTk:\"/all-auctions?savedSearchId=696e3b9488671096827bcdd8\\u0026__cf_c"
   }
 }
